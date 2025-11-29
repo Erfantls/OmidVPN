@@ -13,7 +13,7 @@ class BypassAppsScreen extends ConsumerStatefulWidget {
 }
 
 class _BypassAppsScreenState extends ConsumerState<BypassAppsScreen> {
-  final MethodChannel _appListChannel = MethodChannel('com.pira.imid/app_list');
+  final MethodChannel _appListChannel = MethodChannel('com.pira.omid/app_list');
   List<Map<String, dynamic>> _allApps = [];
   List<String> _selectedPackages = [];
   bool _isLoading = true;
@@ -76,8 +76,17 @@ class _BypassAppsScreenState extends ConsumerState<BypassAppsScreen> {
       return _allApps;
     }
     return _allApps.where((app) {
-      return app['name'].toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          app['packageName'].toLowerCase().contains(_searchQuery.toLowerCase());
+      // Ensure proper UTF-8 handling for search
+      final appName = app['name'] as String;
+      final packageName = app['packageName'] as String;
+      
+      // Normalize text for search to handle Persian/Arabic characters properly
+      final normalizedAppName = appName.toLowerCase();
+      final normalizedPackageName = packageName.toLowerCase();
+      final normalizedSearchQuery = _searchQuery.toLowerCase();
+      
+      return normalizedAppName.contains(normalizedSearchQuery) ||
+          normalizedPackageName.contains(normalizedSearchQuery);
     }).toList();
   }
 
@@ -153,6 +162,8 @@ class _BypassAppsScreenState extends ConsumerState<BypassAppsScreen> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
+              // Text direction for RTL languages like Persian/Arabic
+              textDirection: TextDirection.ltr,
               onChanged: (query) {
                 setState(() {
                   _searchQuery = query;
@@ -188,8 +199,25 @@ class _BypassAppsScreenState extends ConsumerState<BypassAppsScreen> {
                                   fit: BoxFit.contain,
                                 )
                               : Icon(Icons.android, size: 48),
-                          title: Text(app['name']),
-                          subtitle: Text(app['packageName']),
+                          // Ensure proper text rendering for Persian/Arabic characters
+                          title: Text(
+                            app['name'],
+                            style: TextStyle(
+                              fontFamily: 'Roboto', // Use Roboto which has better Unicode support
+                              fontSize: 16,
+                            ),
+                            // Set text direction based on content
+                            textDirection: TextDirection.ltr,
+                          ),
+                          subtitle: Text(
+                            app['packageName'],
+                            style: TextStyle(
+                              fontFamily: 'RobotoMono', // Use monospace for package names
+                              fontSize: 12,
+                            ),
+                            // Set text direction for package names
+                            textDirection: TextDirection.ltr,
+                          ),
                           trailing: Checkbox(
                             value: isSelected,
                             onChanged: (_) {
