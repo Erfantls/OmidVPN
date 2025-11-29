@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:omidvpn/api/api/api.dart';
 import 'package:omidvpn/api/domain/entity/vpn_stage.dart';
-import 'package:omidvpn/ui/about/about_screen.dart';
 import 'package:omidvpn/ui/home/controller/home_controller.dart';
+import 'package:omidvpn/ui/settings/settings_screen.dart';
 
 class HomePage extends ConsumerWidget with HomeState, HomeHandler {
   const HomePage({super.key});
@@ -19,11 +19,11 @@ class HomePage extends ConsumerWidget with HomeState, HomeHandler {
         title: Text(lang.homeTitle),
         actions: [
           IconButton(
-            icon: Icon(Icons.info_outline),
+            icon: Icon(Icons.settings),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AboutScreen()),
+                MaterialPageRoute(builder: (context) => const SettingsScreen()),
               );
             },
           ),

@@ -32,4 +32,24 @@ class LangEN implements Lang {
   String get yes => 'Yes';
   @override
   String get no => 'No';
+  
+  // Settings
+  @override
+  String get settings => 'Settings';
+  @override
+  String get theme => 'Theme';
+  @override
+  String get systemTheme => 'System';
+  @override
+  String get lightTheme => 'Light';
+  @override
+  String get darkTheme => 'Dark';
+  @override
+  String get about => 'About';
+  @override
+  String get appVersion => 'App Version';
+  @override
+  String get exitApp => 'Exit App';
+  @override
+  String get privacyPolicy => 'Privacy Policy';
 }

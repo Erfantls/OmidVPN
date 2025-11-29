@@ -32,26 +32,18 @@ class AboutScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // App logo
-            Container(
+            Image.asset(
+              'assets/icon.png',
               width: 100,
               height: 100,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.blue, width: 2),
-              ),
-              child: ClipOval(
-                child: Image.asset(
-                  'assets/icon.png',
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Icon(
-                      Icons.account_circle,
-                      size: 100,
-                      color: Colors.blue,
-                    );
-                  },
-                ),
-              ),
+              fit: BoxFit.contain,
+              errorBuilder: (context, error, stackTrace) {
+                return Icon(
+                  Icons.account_circle,
+                  size: 100,
+                  color: Colors.blue,
+                );
+              },
             ),
             SizedBox(height: 20),
 

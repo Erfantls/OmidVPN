@@ -34,11 +34,6 @@ OmidVPN is a simple, lightweight, and secure OpenVPN client for Android that all
 - 📱 **Modern UI**: Clean and intuitive user interface built with Flutter
 - 🎯 **Easy to Use**: Simple one-tap connection to VPN servers
 
-## 📋 Requirements
-
-- Android 5.0 (Lollipop) or higher
-- Internet connection for downloading server lists
-
 ## 🚀 Installation
 
 1. Download the latest APK from the [Releases](https://github.com/code3-dev/OmidVPN/releases) page
@@ -69,9 +64,11 @@ OmidVPN respects your privacy. We do not:
 - [x] Cache servers
 - [x] Remove cache if click on refresh icon
 - [x] Connect to VPN
+- [x] Complete theme settings
+- [x] Add settings page
+- [x] Add privacy policy
 - [ ] Auto connect (in future)
 - [ ] Bypass apps (in future)
-- [ ] Select theme (in future)
 - [ ] Select API proxy (in future)
 
 ## 👤 Author

@@ -36,36 +36,26 @@ mixin HomeHandler {
         if (ref.context.mounted) {
           final shouldRequest = await showDialog<bool>(
             context: ref.context,
-            builder: (context) => AlertDialog(
-              title: Text('Notification Permission Required'),
-              content: Text(
-                'This app needs notification permission to show VPN connection status.',
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: Text('Cancel'),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(true),
-                  child: Text('Continue'),
-                ),
-              ],
-            ),
+            builder: (context) => const NotificationPermissionDialog(),
           );
 
+          // If user didn't approve or cancelled, don't continue
           if (shouldRequest != true) {
             return;
           }
-        }
-
-        // Request notification permission
-        try {
-          await platform.invokeMethod('requestNotificationPermission');
-          // Wait a bit for user to grant permission
-          await Future.delayed(Duration(seconds: 1));
-        } catch (e) {
-          // Handle error silently
+          
+          // Check permission again after dialog
+          try {
+            hasPermission =
+                await platform.invokeMethod('checkNotificationPermission') as bool;
+          } catch (e) {
+            hasPermission = false;
+          }
+          
+          // If still no permission, return
+          if (!hasPermission) {
+            return;
+          }
         }
       }
     }

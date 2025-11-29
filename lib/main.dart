@@ -13,6 +13,7 @@ class Omid extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lang = ref.watch(langProvider);
+    final themeMode = ref.watch(themeModeProvider);
 
     return MaterialApp(
       title: lang.homeTitle,
@@ -27,7 +28,7 @@ class Omid extends ConsumerWidget {
         ),
         useMaterial3: true,
       ),
-      themeMode: ThemeMode.system,
+      themeMode: themeMode,
       home: const HomePage(),
     );
   }

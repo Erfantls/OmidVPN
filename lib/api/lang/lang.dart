@@ -14,4 +14,15 @@ abstract class Lang {
   String get yourCurrentSessionWillBeTerminated;
   String get yes;
   String get no;
+  
+  // Settings
+  String get settings;
+  String get theme;
+  String get systemTheme;
+  String get lightTheme;
+  String get darkTheme;
+  String get about;
+  String get appVersion;
+  String get exitApp;
+  String get privacyPolicy;
 }

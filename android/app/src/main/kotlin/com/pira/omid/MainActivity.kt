@@ -35,9 +35,12 @@ class MainActivity: FlutterActivity() {
                 "checkNotificationPermission" -> {
                     result.success(checkNotificationPermission())
                 }
-                "requestNotificationPermission" -> {
-                    requestNotificationPermission()
-                    result.success(null)
+                "requestNotificationPermissionInApp" -> {
+                    result.success(requestNotificationPermissionInApp())
+                }
+                "openAppSettingsForNotifications" -> {
+                    openAppSettings()
+                    result.success(true)
                 }
                 else -> result.notImplemented()
             }
@@ -66,27 +69,20 @@ class MainActivity: FlutterActivity() {
         return NotificationManagerCompat.from(this).areNotificationsEnabled()
     }
     
-    // Request notification permission
-    private fun requestNotificationPermission() {
-        if (!checkNotificationPermission()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                showNotificationPermissionDialog()
-            } else {
-                showNotificationPermissionDialog()
-            }
+    // Request notification permission in app (returns true if already granted or if requested successfully)
+    private fun requestNotificationPermissionInApp(): Boolean {
+        if (checkNotificationPermission()) {
+            return true
         }
-    }
-    
-    // Show dialog to request notification permission
-    private fun showNotificationPermissionDialog() {
-        AlertDialog.Builder(this)
-            .setTitle("Notification Permission Required")
-            .setMessage("This app needs notification permission to show VPN connection status. Please enable notifications in app settings.")
-            .setPositiveButton("Open Settings") { _: DialogInterface, _: Int ->
-                openAppSettings()
-            }
-            .setNegativeButton("Later", null)
-            .show()
+        
+        // For Android 13+ (Tiramisu), we need to request the permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // We can't request permission directly, need to open settings
+            return false
+        } else {
+            // For older versions, permission is usually granted by default
+            return true
+        }
     }
     
     // Open app settings
