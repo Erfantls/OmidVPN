@@ -31,15 +31,15 @@ jobs:
 
       - name: Decode Keystore
         run: |
-         echo "${{ secrets.KEY_STORE }}" | base64 -d > android/app/keystore.jks
+          echo "${{ secrets.KEY_STORE }}" | base64 -d > android/app/keystore.jks
         shell: bash
 
       - name: Create keystore properties file
         run: |
-         echo storePassword=${{ secrets.KEY_STORE_PASSWORD }} > android/key.properties
-         echo keyPassword=${{ secrets.KEY_PASSWORD }} >> android/key.properties
-         echo keyAlias=${{ secrets.KEY_ALIAS }} >> android/key.properties
-         echo storeFile=keystore.jks >> android/key.properties
+          echo storePassword=${{ secrets.KEY_STORE_PASSWORD }} > android/key.properties
+          echo keyPassword=${{ secrets.KEY_PASSWORD }} >> android/key.properties
+          echo keyAlias=${{ secrets.KEY_ALIAS }} >> android/key.properties
+          echo storeFile=keystore.jks >> android/key.properties
         shell: bash
 
       - name: Get dependencies
@@ -85,9 +85,9 @@ jobs:
             release/omidvpn-x86_64.apk
           body: |
             ## Installation
-            
+
             ### Download
-            
+
             | Architecture | Download Link |
             |-------------|---------------|
             | Universal   | <a href="https://github.com/code3-dev/OmidVPN/releases/download/${{ env.TAG_NAME }}/omidvpn-universal.apk"><img src="https://img.shields.io/badge/Android-Universal-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android Universal"></a> |
