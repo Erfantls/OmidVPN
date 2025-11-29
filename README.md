@@ -62,9 +62,17 @@ OmidVPN respects your privacy. We do not:
 - Store logs of your connections
 - Display advertisements
 
-## 📄 License
+## 📋 TODO
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+- [x] Load servers from API
+- [x] Home screen, About screen and Server list
+- [x] Cache servers
+- [x] Remove cache if click on refresh icon
+- [x] Connect to VPN
+- [ ] Auto connect (in future)
+- [ ] Bypass apps (in future)
+- [ ] Select theme (in future)
+- [ ] Select API proxy (in future)
 
 ## 👤 Author
 
@@ -84,17 +92,9 @@ Contributions are welcome! Feel free to submit pull requests or open issues for 
 - Built with [Flutter](https://flutter.dev/)
 - Uses [OpenVPN for Android](https://github.com/schwabe/ics-openvpn)
 
-## 📋 TODO
+## 📄 License
 
-- [x] Load servers from API
-- [x] Home screen, About screen and Server list
-- [x] Cache servers
-- [x] Remove cache if click on refresh icon
-- [x] Connect to VPN
-- [ ] Auto connect (in future)
-- [ ] Bypass apps (in future)
-- [ ] Select theme (in future)
-- [ ] Select API proxy (in future)
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
 ---
 <p align="center">Made with ❤️ by <a href="https://github.com/code3-dev">Hossein Pira</a></p>
