@@ -21,8 +21,8 @@ class CountrySelectorWidget extends ConsumerWidget {
             countryMap[server.countryShort] = server.countryLong;
           }
           
-          // Count premium servers (those with "pro-server" hostname)
-          if (server.hostName.toLowerCase().contains('pro')) {
+          // Count premium servers using the isPremium flag
+          if (server.isPremium) {
             premiumServerCount++;
           }
         }

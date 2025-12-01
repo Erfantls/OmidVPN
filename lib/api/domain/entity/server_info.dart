@@ -14,6 +14,7 @@ class ServerInfo {
   final String operator;
   final String message;
   final String vpnConfig;
+  final bool isPremium; // Add this field to track premium servers
 
   ServerInfo({
     required this.hostName,
@@ -31,6 +32,7 @@ class ServerInfo {
     required this.operator,
     required this.message,
     required this.vpnConfig,
+    this.isPremium = false, // Default to false
   });
 
   ServerInfo.empty()
@@ -48,7 +50,8 @@ class ServerInfo {
       logType = '',
       operator = '',
       message = '',
-      vpnConfig = '';
+      vpnConfig = '',
+      isPremium = false;
 
   copyWith({
     String? hostName,
@@ -66,6 +69,7 @@ class ServerInfo {
     String? operator,
     String? message,
     String? vpnConfig,
+    bool? isPremium,
   }) {
     return ServerInfo(
       hostName: hostName ?? this.hostName,
@@ -83,6 +87,7 @@ class ServerInfo {
       operator: operator ?? this.operator,
       message: message ?? this.message,
       vpnConfig: vpnConfig ?? this.vpnConfig,
+      isPremium: isPremium ?? this.isPremium,
     );
   }
 }

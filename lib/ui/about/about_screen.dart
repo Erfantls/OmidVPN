@@ -100,6 +100,15 @@ class AboutScreen extends ConsumerWidget {
                         _launchUrl('https://instagram.com/h3dev.pira');
                       },
                     ),
+                    ListTile(
+                      leading: Icon(Icons.rocket),
+                      title: Text('X (Twitter)'),
+                      subtitle: Text('albert_com32388'),
+                      onTap: () {
+                        // Open Twitter profile
+                        _launchUrl('https://x.com/albert_com32388');
+                      },
+                    ),
                   ],
                 ),
               ),

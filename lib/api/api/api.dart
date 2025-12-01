@@ -76,13 +76,7 @@ final vpngateRepositoryProvider = FutureProvider((Ref ref) async {
       baseURL:
           'https://raw.githubusercontent.com/fdciabdul/Vpngate-Scraper-API/refs/heads/main/json/data.json',
     ),
-    additionalSources: [
-      JsonServerRemoteSource(
-        dio: dio,
-        baseURL:
-            'https://raw.githubusercontent.com/code3-dev/omidvpn-api/refs/heads/master/api/index.json',
-      ),
-    ],
+    additionalSources: [], // We'll add premium sources dynamically when fetching
     localSource: cacheManager,
     cacheKey: 'json_servers.json',
   );

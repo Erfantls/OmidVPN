@@ -21,14 +21,13 @@ class ServerListScreen extends ConsumerWidget
         actions: [
           (kDebugMode)
               ? IconButton(
-                  onPressed: () => getServerListUsecase(ref, getCache: true),
-                  icon: const Icon(Icons.cached),
+                  onPressed: () => getServerListUsecase(ref, forceRefresh: true),
+                  icon: const Icon(Icons.refresh),
                 )
-              : const SizedBox(),
-          IconButton(
-            onPressed: () => getServerListUsecase(ref, forceRefresh: true),
-            icon: const Icon(Icons.refresh),
-          ),
+              : IconButton(
+                  onPressed: () => getServerListUsecase(ref, forceRefresh: true),
+                  icon: const Icon(Icons.refresh),
+                ),
         ],
       ),
       body: Column(
@@ -52,6 +51,7 @@ class ServerListScreen extends ConsumerWidget
                         server: serverList[index].copyWith(
                           speed: toMegaBytes(serverList[index].speed),
                           uptime: toDays(serverList[index].uptime),
+                          isPremium: serverList[index].isPremium, // Preserve the isPremium flag
                         ),
                         onSelect: () =>
                             selectServerUsecase(ref, server: serverList[index]),

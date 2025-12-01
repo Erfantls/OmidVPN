@@ -13,9 +13,9 @@ mixin ServerListState {
       // But put premium servers first
       final sortedServers = List<ServerInfo>.from(servers)
         ..sort((a, b) {
-          // Check if servers are premium
-          final aIsPremium = a.hostName.toLowerCase().contains('pro');
-          final bIsPremium = b.hostName.toLowerCase().contains('pro');
+          // Check if servers are premium using the isPremium flag
+          final aIsPremium = a.isPremium;
+          final bIsPremium = b.isPremium;
           
           // If one is premium and the other isn't, premium comes first
           if (aIsPremium && !bIsPremium) return -1;
@@ -28,7 +28,7 @@ mixin ServerListState {
       // If "Premium" is selected, show only premium servers
       if (selectedCountry == 'PREMIUM') {
         return sortedServers
-            .where((server) => server.hostName.toLowerCase().contains('pro'))
+            .where((server) => server.isPremium)
             .toList();
       }
 

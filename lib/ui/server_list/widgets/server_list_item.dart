@@ -19,36 +19,14 @@ class ServerListItem extends ConsumerWidget {
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      child: ListTile(
-        leading: SizedBox(
-          width: 60,
-          height: 40,
-          child: (() {
-            final countryCode = server.countryShort.toLowerCase();
-            final flagAssetPath = 'assets/CountryFlags/$countryCode.png';
-            return Image.asset(
-              flagAssetPath,
-              errorBuilder: (context, error, stackTrace) {
-                // Show a default flag or empty container if flag not found
-                return Container(
-                  color: Colors.grey[300],
-                  child: const Icon(Icons.flag, size: 20),
-                );
-              },
-              fit: BoxFit.contain,
-            );
-          })(),
-        ),
-        title: Row(
-          children: [
-            Text(
-              server.hostName,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-            // Show a "Premium" badge for premium servers
-            if (server.hostName.toLowerCase().contains('pro'))
-              Container(
-                margin: const EdgeInsets.only(left: 8),
+      child: Stack(
+        children: [
+          // Premium tag in the top-right corner
+          if (server.isPremium)
+            Positioned(
+              top: 8,
+              right: 8,
+              child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
                   color: Colors.orange,
@@ -63,52 +41,77 @@ class ServerListItem extends ConsumerWidget {
                   ),
                 ),
               ),
-          ],
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+            ),
+          ListTile(
+            leading: SizedBox(
+              width: 60,
+              height: 40,
+              child: (() {
+                final countryCode = server.countryShort.toLowerCase();
+                final flagAssetPath = 'assets/CountryFlags/$countryCode.png';
+                return Image.asset(
+                  flagAssetPath,
+                  errorBuilder: (context, error, stackTrace) {
+                    // Show a default flag or empty container if flag not found
+                    return Container(
+                      color: Colors.grey[300],
+                      child: const Icon(Icons.flag, size: 20),
+                    );
+                  },
+                  fit: BoxFit.contain,
+                );
+              })(),
+            ),
+            title: Text(
+              server.hostName,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.people, size: 16),
-                const SizedBox(width: 4),
-                Text('${server.numVpnSessions} ${lang.sessions}'),
+                Row(
+                  children: [
+                    Icon(Icons.people, size: 16),
+                    const SizedBox(width: 4),
+                    Text('${server.numVpnSessions} ${lang.sessions}'),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Icon(Icons.access_time, size: 16),
+                    const SizedBox(width: 4),
+                    Text('${server.uptime} ${lang.days}'),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                // Show country abbreviation instead of speed
+                Row(
+                  children: [
+                    Icon(Icons.flag, size: 16),
+                    const SizedBox(width: 4),
+                    Text('${server.countryShort}'),
+                  ],
+                ),
               ],
             ),
-            const SizedBox(height: 4),
-            Row(
-              children: [
-                Icon(Icons.access_time, size: 16),
-                const SizedBox(width: 4),
-                Text('${server.uptime} ${lang.days}'),
-              ],
+            trailing: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                server.countryShort,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-            const SizedBox(height: 4),
-            // Show country abbreviation instead of speed
-            Row(
-              children: [
-                Icon(Icons.flag, size: 16),
-                const SizedBox(width: 4),
-                Text('${server.countryShort}'),
-              ],
-            ),
-          ],
-        ),
-        trailing: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(12),
+            onTap: onSelect,
           ),
-          child: Text(
-            server.countryShort,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        onTap: onSelect,
+        ],
       ),
     );
   }

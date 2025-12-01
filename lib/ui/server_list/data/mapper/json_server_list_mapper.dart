@@ -31,7 +31,7 @@ sealed class JsonServerListMapper {
     return base64String + '=' * padLength;
   }
 
-  static List<ServerInfo> fromJson({required List<dynamic> jsonData}) {
+  static List<ServerInfo> fromJson({required List<dynamic> jsonData, bool isPremiumSource = false}) {
     List<ServerInfo> list = [];
 
     try {
@@ -73,6 +73,7 @@ sealed class JsonServerListMapper {
                     vpnConfig: _decodeVpnConfig(
                       server['openvpn_configdata_base64'] as String? ?? '',
                     ),
+                    isPremium: isPremiumSource, // Set the premium flag
                   ),
                 );
               } catch (serverError) {
@@ -112,6 +113,7 @@ sealed class JsonServerListMapper {
                   vpnConfig: _decodeVpnConfig(
                     server['openvpn_configdata_base64'] as String? ?? '',
                   ),
+                  isPremium: isPremiumSource, // Set the premium flag
                 ),
               );
             } catch (serverError) {

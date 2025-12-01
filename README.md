@@ -29,7 +29,7 @@ OmidVPN is a simple, lightweight, and secure OpenVPN client for Android that all
 - 🔒 **Secure Connection**: Connect to VPN servers with strong encryption
 - 🌍 **Global Servers**: Access servers from various countries around the world
 - ⚡ **Fast & Lightweight**: Minimal resource usage for optimal performance
-- 💰 **Completely Free**: No ads, no subscriptions, no hidden fees
+- 💰 **Free with Premium Options**: Free to use with optional premium license for additional servers
 - 🚫 **No Tracking**: Respects your privacy with zero data collection
 - 📱 **Modern UI**: Clean and intuitive user interface built with Flutter
 - 🎯 **Easy to Use**: Simple one-tap connection to VPN servers
@@ -86,6 +86,7 @@ OmidVPN respects your privacy. We do not:
 - Telegram: [@h3dev](https://t.me/h3dev)
 - Email: [h3dev.pira@gmail.com](mailto:h3dev.pira@gmail.com)
 - Instagram: [@h3dev.pira](https://instagram.com/h3dev.pira)
+- X (Twitter): [@albert_com32388](https://x.com/albert_com32388)
 
 ## 🤝 Contributing
 
